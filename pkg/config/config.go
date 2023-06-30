@@ -21,6 +21,7 @@ type PostgresInfo struct {
 	PostgresPassword string
 	PostgresHost     string
 	PostgresDB       string
+	PostgresPort     string
 }
 
 func LoadConfig() *appConfig {
@@ -28,7 +29,7 @@ func LoadConfig() *appConfig {
 		log.Fatal(".env not found")
 	}
 
-	addr := ":" + os.Getenv("PORT")
+	addr := ":" + os.Getenv("API_PORT")
 
 	httpInfo := &HTTPInfo{
 		Addr: addr,
@@ -38,12 +39,14 @@ func LoadConfig() *appConfig {
 	postgresPass := os.Getenv("POSTGRES_PASSWORD")
 	postgresHost := os.Getenv("POSTGRES_HOST")
 	postgresDB := os.Getenv("POSTGRES_DB")
+	postgresPort := os.Getenv("POSTGRES_PORT")
 
 	dbInfo := &PostgresInfo{
 		PostgresUser:     postgresUser,
 		PostgresPassword: postgresPass,
 		PostgresHost:     postgresHost,
 		PostgresDB:       postgresDB,
+		PostgresPort:     postgresPort,
 	}
 
 	conf := appConfig{
